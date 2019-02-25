@@ -78,6 +78,7 @@ void delete_front(linkedlist_t* ll){
     if(ll->head != NULL){
         ll->head = ll->head->next;
         ll->head->prev = NULL;
+        free(ll->head->prev);
     }
 }
 
@@ -85,10 +86,16 @@ void delete_back(linkedlist_t* ll){
     if(ll->head != NULL){
         ll->tail = ll->tail->prev;
         ll->tail->next = NULL;
+        free(ll->tail->next);
     }
 }
 
 void delete_middle(int pos, linkedlist_t* ll){
+    if(pos == 0){
+        delete_front(ll);
+    }
+
+    pos--;
     node_t* tmp = ll->head;
 
     int i;
@@ -99,9 +106,14 @@ void delete_middle(int pos, linkedlist_t* ll){
             return;
         }
     }
-
-    tmp->next->next->prev = tmp;
-    tmp->next = tmp->next->next;
+    if(tmp->next == NULL){
+        delete_back(ll);
+    }else if(tmp->next->next == NULL){
+        ll->tail->prev = tmp->prev;
+    }else{
+        tmp->next->next->prev = tmp;
+        tmp->next = tmp->next->next;
+    }
 }
 
 void print_ll(linkedlist_t* ll){
@@ -123,7 +135,7 @@ int main(){
 	insert_middle(10, 2, &list);
 	insert_middle(10, 10, &list);
 	insert_middle(22, 7, &list);
-//	delete_middle(6, &list);
+	delete_middle(0, &list);
 //	delete_front(&list);
 //	delete_back(&list);
 	print_ll(&list);

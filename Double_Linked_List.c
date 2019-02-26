@@ -46,7 +46,7 @@ void insert_back(int value, linkedlist_t* ll){
 }
 
 void insert_middle(int value, int pos, linkedlist_t* ll){
-    if(pos == 0){
+    if(pos == -1){
         insert_front(value, ll);
         return;
     }

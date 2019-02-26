@@ -1,3 +1,13 @@
+/*
+    
+    Template Double Linked List
+
+    Nama    : Ammar Alifian F
+    NRP     : 05111840000007
+    Matkul  : Struktur Data - B
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -117,26 +127,42 @@ void delete_middle(int pos, linkedlist_t* ll){
 }
 
 void print_ll(linkedlist_t* ll){
-	node_t* tmp = ll->head;
-	while(tmp != NULL){
-		printf("%d ", tmp->val);
-		tmp = tmp->next;
-	}
-	printf("\n");
+    node_t* tmp = ll->head;
+    while(tmp != NULL){
+        printf("%d ", tmp->val);
+        tmp = tmp->next;
+    }
+    printf("\n");
+}
+
+void print_reverse_ll(linkedlist_t* ll){
+    node_t* tmp = ll->tail;
+    while(tmp != NULL){
+        printf("%d ", tmp->val);
+        tmp = tmp->prev;
+    }
+    printf("\n");
 }
 
 int main(){
 	linkedlist_t list;
 	list.head = NULL;
+    //Insert 15 from the front
 	insert_front(15, &list);
+    //Insert 25 from the front
 	insert_front(25, &list);
+    //Insert 30 from the back
 	insert_back(30, &list);
+    //Insert 40 from the back
 	insert_back(40, &list);
+    //Insert 10 after the 2nd node
 	insert_middle(10, 2, &list);
+    //Insert 10 after the 10th node (last node)
 	insert_middle(10, 10, &list);
+    //Insert 22 after the 7th node
 	insert_middle(22, 7, &list);
+    //Delete the 0th node
 	delete_middle(0, &list);
-//	delete_front(&list);
-//	delete_back(&list);
-	print_ll(&list);
+    //Print the linked list
+	print_reverse_ll(&list);
 }
